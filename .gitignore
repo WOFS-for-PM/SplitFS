@@ -25,3 +25,4 @@ linux-4.18.10.tar.gz
 !kernel/kbuild/Makefile.setup
 !sqlite3-trace/
 !cvar_trace.h
+.vscode/
