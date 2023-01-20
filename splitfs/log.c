@@ -668,7 +668,7 @@ void ledger_append_log_recovery() {
 		}
 		
 		// Do dynamic remap between file X and DR file or simply copy data.
-		ret = syscall(335, file_fd,
+		ret = ioctl_swap_extents(file_fd,
 			      dr_fd,
 			      app_entry.file_offset,
 			      app_entry.dr_offset,

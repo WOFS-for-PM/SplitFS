@@ -32,7 +32,7 @@ We evaluate and benchmark on SplitFS using different application benchmarks like
     * `$ sudo update-grub && sudo update-grub2`
     * Reboot system
     * Run `uname -r` to ensure that system is booted with 4.13.0 kernel, and ensure that `/dev/pmem0` exists
-    * `$ mkdir /mnt/pmem_emul`
+    * `$ mkdir /mnt/pmem0`
 
 ---
 

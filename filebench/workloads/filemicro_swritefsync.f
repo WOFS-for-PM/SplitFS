@@ -29,7 +29,7 @@
 # (i.e., 8MB written) fsync is called.
 # The run finishes after 1GB is fully written.
 
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $iosize=4k
 set $filesize=4g
 set $writeiters=1

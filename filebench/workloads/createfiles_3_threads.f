@@ -23,7 +23,7 @@
 # Use is subject to license terms.
 #
 
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $nfiles=50000
 set $meandirwidth=100
 set $meanfilesize=16k

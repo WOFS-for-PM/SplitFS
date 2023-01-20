@@ -25,7 +25,7 @@
 # Creates a fileset with $ndirs empty leaf directories then rmdir's all of them
 #
 
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $ndirs=10000
 set $meandirwidth=100
 set $nthreads=1

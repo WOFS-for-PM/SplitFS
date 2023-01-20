@@ -24,7 +24,7 @@
 #
 # Creates a directory with $ndirs potential leaf directories, than mkdir's them
 #
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $ndirs=10000
 set $meandirwidth=100
 set $nthreads=1

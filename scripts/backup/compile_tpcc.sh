@@ -11,8 +11,8 @@ make clean
 make
 
 cd $tpcc_path
-sudo cp ./tpcc.db /mnt/pmem_emul
+sudo cp ./tpcc.db /mnt/pmem0
 sudo ./tpcc_load -w 4
 
 mkdir ./database
-sudo cp /mnt/pmem_emul/tpcc.db ./database/
+sudo cp /mnt/pmem0/tpcc.db ./database/

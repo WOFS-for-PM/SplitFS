@@ -2,7 +2,7 @@
 
 current_dir=$(pwd)
 setup_dir=`readlink -f ..`
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 
 run_ycsb()
 {

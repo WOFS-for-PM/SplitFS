@@ -2,7 +2,7 @@
 
 current_dir=$(pwd)
 setup_dir=`readlink -f ../configs`
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 
 run_lmdb()
 {

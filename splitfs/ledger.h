@@ -417,9 +417,9 @@ pthread_spinlock_t staging_over_mmap_lock;
 #define DR_OVER_SIZE (256*1024*1024)
 #endif
 
-#define NVMM_PATH "/mnt/pmem_emul/"
-#define DR_APPEND_PATH "/mnt/pmem_emul/DR-XXXXXX"
-#define DR_OVER_PATH "/mnt/pmem_emul/DR-OVER-XXXXXX"
+#define NVMM_PATH "/mnt/pmem0/"
+#define DR_APPEND_PATH "/mnt/pmem0/DR-XXXXXX"
+#define DR_OVER_PATH "/mnt/pmem0/DR-OVER-XXXXXX"
 
 #define	ALIGN_MMAP_DOWN(addr)	((addr) & ~(MAX_MMAP_SIZE - 1))
 

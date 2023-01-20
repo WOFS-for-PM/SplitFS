@@ -3,7 +3,7 @@
 src_dir=`readlink -f ../../`
 cur_dir=`readlink -f ./`
 setup_dir=`readlink -f ../configs`
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 
 run_ycsb()
 {

@@ -13,7 +13,7 @@ run_id=$2
 current_dir=$(pwd)
 fio_dir=`readlink -f ../../fio`
 workload_dir=$fio_dir/workloads
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 boost_dir=`readlink -f ../../splitfs`
 result_dir=`readlink -f ../../results`
 fs_results=$result_dir/$fs/$workload
@@ -46,9 +46,9 @@ run_workload()
     date
 
     if [ $run_boost -eq 1 ]; then
-        $boost_dir/run_boost.sh -p $boost_dir -t nvp_nvp.tree $fio_dir/fio --ioengine=sync --name=test --bs=4k --readwrite=randrw --rwmixread=50 --size=4G --filename=$pmem_dir/testfile 2>&1 | tee $fs_results/run$run_id
+        $boost_dir/run_boost.sh -p $boost_dir -t nvp_nvp.tree fio --ioengine=sync --name=test --bs=4k --readwrite=write --size=4G --filename=$pmem_dir/testfile 2>&1 | tee $fs_results/run$run_id
     else
-	$fio_dir/fio --ioengine=sync --name=test --bs=4k --readwrite=randrw --rwmixread=50 --size=4G --filename=$pmem_dir/testfile 2>&1 | tee $fs_results/run$run_id
+	fio --ioengine=sync --name=test --bs=4k --readwrite=write --size=4G --filename=$pmem_dir/testfile 2>&1 | tee $fs_results/run$run_id
     fi
 
     date

@@ -401,7 +401,7 @@ static inline size_t dynamic_remap_large(int file_fd, struct NVNode *node, int c
 			len_to_swap = over_file_end - over_file_start + 1;
 			START_TIMING(swap_extents_t, swap_extents_time);
 			DEBUG_FILE("%s: Dynamic remap args: file_fd = %d, over_dr fd = %d, file_start = %lld, over_dr start = %lld, over_dr start addr = %p, len_to_swap = %lu\n", __func__, file_fd, node->dr_over_info.dr_fd, over_file_start, over_dr_start, (const char *) node->dr_over_info.start_addr, len_to_swap);
-			len_swapped = syscall(335, file_fd,
+			len_swapped = ioctl_swap_extents(file_fd,
 					      node->dr_over_info.dr_fd,
 					      over_file_start,
 					      over_dr_start,
@@ -457,7 +457,7 @@ static inline size_t dynamic_remap_large(int file_fd, struct NVNode *node, int c
 				// Perform swap extents from append DR file
 				START_TIMING(swap_extents_t, swap_extents_time);
 				DEBUG_FILE("%s: Dynamic remap args: file_fd = %d, app_dr fd = %d, file_start = %lld, app_dr start = %lld, app_dr start addr = %p, len_to_swap = %lu\n", __func__, file_fd, node->dr_info.dr_fd, file_start_off, app_start_off, (const char *) node->dr_info.start_addr, len_to_swap);
-				len_swapped = syscall(335, file_fd,
+				len_swapped = ioctl_swap_extents(file_fd,
 						      node->dr_info.dr_fd,
 						      file_start_off,
 						      app_start_off,
@@ -490,7 +490,7 @@ static inline size_t dynamic_remap_large(int file_fd, struct NVNode *node, int c
 			START_TIMING(swap_extents_t, swap_extents_time);
 			len_to_swap = over_file_end - over_file_start + 1;
 			DEBUG_FILE("%s: Dynamic remap args: file_fd = %d, over_dr fd = %d, file_start = %lld, over_dr start = %lld, over_dr start addr = %p, len_to_swap = %lu\n", __func__, file_fd, node->dr_over_info.dr_fd, file_start_off, over_dr_start, (const char *) node->dr_over_info.start_addr, len_to_swap);
-			len_swapped = syscall(335, file_fd,
+			len_swapped = ioctl_swap_extents(file_fd,
 					      node->dr_over_info.dr_fd,
 					      over_file_start,
 					      over_dr_start,
@@ -537,7 +537,7 @@ static inline size_t dynamic_remap_large(int file_fd, struct NVNode *node, int c
 			DEBUG_FILE("%s: Dynamic remap args: file_fd = %d, app_dr fd = %d, file_start = %lld, app_dr start = %lld, app_dr start addr = %p, len_to_swap = %lu\n", __func__, file_fd, node->dr_info.dr_fd, file_start_off, app_start_off, (const char *) node->dr_info.start_addr, len_to_swap);
 			// Perform swap extents from append DR file
 			START_TIMING(swap_extents_t, swap_extents_time);
-			len_swapped = syscall(335, file_fd,
+			len_swapped = ioctl_swap_extents(file_fd,
 					      node->dr_info.dr_fd,
 					      file_start_off,
 					      app_start_off,
@@ -619,7 +619,7 @@ static inline size_t dynamic_remap_updates(int file_fd, struct NVNode *node, int
 		len_to_swap = over_file_end - over_file_start + 1;
 		START_TIMING(swap_extents_t, swap_extents_time);
 		DEBUG_FILE("%s: Dynamic remap args: file_fd = %d, over_dr fd = %d, file_start = %lld, over_dr start = %lld, over_dr start addr = %p, len_to_swap = %lu\n", __func__, file_fd, node->dr_over_info.dr_fd, over_file_start, over_dr_start, (const char *) node->dr_over_info.start_addr, len_to_swap);
-		len_swapped = syscall(335, file_fd,
+		len_swapped = ioctl_swap_extents(file_fd,
 				      node->dr_over_info.dr_fd,
 				      over_file_start,
 				      over_dr_start,
@@ -668,7 +668,7 @@ static inline size_t dynamic_remap_updates(int file_fd, struct NVNode *node, int
 			// Perform swap extents from append DR file
 			START_TIMING(swap_extents_t, swap_extents_time);
 			DEBUG_FILE("%s: Dynamic remap args: file_fd = %d, app_dr fd = %d, file_start = %lld, app_dr start = %lld, app_dr start addr = %p, len_to_swap = %lu\n", __func__, file_fd, node->dr_info.dr_fd, file_start_off, app_start_off, (const char *) node->dr_info.start_addr, len_to_swap);
-			len_swapped = syscall(335, file_fd,
+			len_swapped = ioctl_swap_extents(file_fd,
 					      node->dr_info.dr_fd,
 					      *file_start_off,
 					      app_start_off,
@@ -704,7 +704,7 @@ static inline size_t dynamic_remap_updates(int file_fd, struct NVNode *node, int
 		START_TIMING(swap_extents_t, swap_extents_time);
 		len_to_swap = over_file_end - over_file_start + 1;
 		DEBUG_FILE("%s: Dynamic remap args: file_fd = %d, over_dr fd = %d, file_start = %lld, over_dr start = %lld, over_dr start addr = %p, len_to_swap = %lu\n", __func__, file_fd, node->dr_over_info.dr_fd, file_start_off, over_dr_start, (const char *) node->dr_over_info.start_addr, len_to_swap);
-	        len_swapped = syscall(335, file_fd,
+	        len_swapped = ioctl_swap_extents(file_fd,
 				      node->dr_over_info.dr_fd,
 				      over_file_start,
 				      over_dr_start,
@@ -785,7 +785,7 @@ static inline size_t dynamic_remap(int file_fd, struct NVNode *node, int close)
 				   app_start_off, len_to_swap);
 
 			// Perform swap extents from append DR file
-			len_swapped = syscall(335, file_fd,
+			len_swapped = ioctl_swap_extents(file_fd,
 					      node->dr_info.dr_fd,
 					      file_start_off,
 					      app_start_off,

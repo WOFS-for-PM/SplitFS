@@ -5,7 +5,7 @@ CWD=$(shell pwd)
 # Root of the repo
 ROOT=$(CWD)/..
 # SplitFS path
-SFS_PATH=/mnt/pmem_emul/
+SFS_PATH=/mnt/pmem0/
 # PJD Dir
 PJD_DIR=$(CWD)/pjd-fstest-20080816
 

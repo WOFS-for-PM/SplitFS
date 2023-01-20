@@ -5,7 +5,7 @@ set -x
 src_dir=`readlink -f ../../`
 cur_dir=`readlink -f ./`
 tpcc_path=$src_dir/tpcc-sqlite
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 
 cd $tpcc_path
 sudo cp ./schema2/tpcc.db $pmem_dir/

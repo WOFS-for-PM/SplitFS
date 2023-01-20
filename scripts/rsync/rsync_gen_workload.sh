@@ -2,7 +2,7 @@
 
 src_dir=`readlink -f ../../`
 cur_dir=`readlink -f ./`
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 src=$pmem_dir/src
 
 rm -rf $pmem_dir/*

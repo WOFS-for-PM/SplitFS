@@ -79,4 +79,29 @@ void close_cloexec_files();
   SANITYCHECK(nvf->node->data != NULL)
 */
 
+#define EXT4_IOC_DYNAMIC_REMAP	_IOWR('f', 13, struct dynamic_remap_data)
+
+struct dynamic_remap_data {
+	int fd1; 
+	int fd2;
+	loff_t offset1; 
+	loff_t offset2;
+	const char *start_addr;
+	loff_t count;
+};
+
+static inline int ioctl_swap_extents(int fd1, int fd2, loff_t offset1, 
+									 loff_t offset2, const char *start_addr, loff_t count)
+{
+	struct dynamic_remap_data data;
+	data.fd1 = fd1;
+	data.fd2 = fd2;
+	data.offset1 = offset1;
+	data.offset2 = offset2;
+	data.start_addr = start_addr;
+	data.count = count;
+	return ioctl(fd1, EXT4_IOC_DYNAMIC_REMAP, &data);
+}
+
+
 #endif
