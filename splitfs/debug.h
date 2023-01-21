@@ -75,7 +75,7 @@ void print_trace();
 
 FILE *debug_fd;
 #define DEBUG_FD debug_fd
-
+#define PRINT_DEBUG_FILE 1
 #if PRINT_DEBUG_FILE
 #define DEBUG_FILE(format, ...) do {PRINTFUNC(DEBUG_FD, "\033[01;33mNVP_DEBUG\
 \e[m (pid %i): " format, getpid(), ##__VA_ARGS__); }while(0)

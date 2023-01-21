@@ -1,3 +1,14 @@
+## Note
+Through the experiments of these days, I found that:
+
+- SplitFS never calls relink when I ran Filebench and FIO.
+
+- SplitFS-Strict cannot pass FIO workload.
+
+- Try only using SplitFS-POSIX mode, and it works well.
+
+- The statistics of SplitFS is not accurate (e.g., the num_write should be more than 10000, but it reports 0), and I don't know why.
+
 ## SplitFS
 
 [SplitFS](https://github.com/utsaslab/SplitFS) is a file system for Persistent Memory (PM) which is aimed at reducing the software overhead of applications accessing Persistent Memory. SplitFS presents a novel split of responsibilities between a user-space library file system and an existing kernel PM file system. The user-space library file system handles data operations by intercepting POSIX calls, memory mapping the underlying file, and serving the reads and overwrites using processor loads and stores. Metadata operations are handled by the kernel file system (ext4 DAX). 

@@ -739,7 +739,7 @@ static inline size_t dynamic_remap(int file_fd, struct NVNode *node, int close)
 
 	DEBUG_FILE("%s: START: file_fd = %d. dr start addr = %p, dr over start addr = %p, true_length = %lu, length = %lu, Inode number = %lu\n",
 		   __func__, file_fd, node->dr_info.start_addr, node->dr_over_info.start_addr, node->true_length, node->length, node->serialno);
-
+	
 #if DATA_JOURNALING_ENABLED
 
 	len_written = dynamic_remap_updates(file_fd, node, close, &file_start_off);
@@ -774,7 +774,7 @@ static inline size_t dynamic_remap(int file_fd, struct NVNode *node, int close)
 			assert(0);
 
 		len_to_swap = node->dr_info.dr_offset_end - app_start_off;
-
+		MSG("len_to_swap = %lu, app_start_off = %lld, dr_offset_end = %lld, valid_offset = %lld, file_start_off = %lld, true_length = %lu \n", len_to_swap, app_start_off, node->dr_info.dr_offset_end, node->dr_info.valid_offset, file_start_off, node->true_length);
 		if (len_to_swap) {
 			app_start_addr = node->dr_info.start_addr + app_start_off;
 
@@ -5407,7 +5407,7 @@ RETT_FTELLO _nvp_FTELLO(INTF_FTELLO)
 
 RETT_WRITE _nvp_WRITE(INTF_WRITE)
 {
-	DEBUG("_nvp_WRITE %d\n", file);
+	DEBUG("_nvp_WRITE %d\n", num_write);
 	num_write++;
 	RETT_WRITE result;
 	instrumentation_type write_time;
@@ -5583,7 +5583,7 @@ RETT_PREAD _nvp_PREAD(INTF_PREAD)
 RETT_PWRITE _nvp_PWRITE(INTF_PWRITE)
 {
 	CHECK_RESOLVE_FILEOPS(_nvp_);
-	DEBUG("_nvp_PWRITE %d\n", file);
+	MSG("_nvp_PWRITE %d\n", num_write);
 	num_write++;
 	instrumentation_type write_time;
 	RETT_PWRITE result;
@@ -6314,7 +6314,7 @@ RETT_FSYNC _nvp_FSYNC(INTF_FSYNC)
 	END_TIMING(fsync_t, fsync_time);
 	return 0;
 #endif
-
+	// MSG("CALL: _nvp_FSYNC\n");
 	// Retrieve the NVFile from the global array of NVFiles
 	cpuid = GET_CPUID();
 	struct NVFile* nvf = &_nvp_fd_lookup[file];

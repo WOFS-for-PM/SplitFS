@@ -46,7 +46,7 @@ run_workload()
     date
 
     if [ $run_boost -eq 1 ]; then
-        $boost_dir/run_boost.sh -p $boost_dir -t nvp_nvp.tree fio --ioengine=sync --name=test --bs=4k --readwrite=write --size=4G --filename=$pmem_dir/testfile 2>&1 | tee $fs_results/run$run_id
+        $boost_dir/run_boost.sh -p $boost_dir -t nvp_nvp.tree fio --ioengine=sync -fsync=1 --name=test --bs=4k --readwrite=randwrite --size=1G --filename=$pmem_dir/testfile 2>&1 | tee $fs_results/run$run_id
     else
 	fio --ioengine=sync --name=test --bs=4k --readwrite=write --size=4G --filename=$pmem_dir/testfile 2>&1 | tee $fs_results/run$run_id
     fi

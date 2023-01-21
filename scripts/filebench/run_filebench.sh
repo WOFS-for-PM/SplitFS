@@ -16,30 +16,30 @@ run_filebench()
     done
 }
 
-echo "-- ext4 DAX --"
-cd $setup_dir
-sudo ./nova_config.sh
-cd $current_dir
-sudo $setup_dir/dax_config.sh
-run_filebench dax
+# echo "-- ext4 DAX --"
+# cd $setup_dir
+# sudo ./nova_config.sh
+# cd $current_dir
+# sudo $setup_dir/dax_config.sh
+# run_filebench dax
 
-echo "-- NOVA Relaxed --"
-cd $setup_dir
-sudo ./nova_relaxed_config.sh
-cd $current_dir
-run_filebench relaxed_nova
+# echo "-- NOVA Relaxed --"
+# cd $setup_dir
+# sudo ./nova_relaxed_config.sh
+# cd $current_dir
+# run_filebench relaxed_nova
 
-echo "-- NOVA --"
-cd $setup_dir
-sudo ./nova_config.sh
-cd $current_dir
-run_filebench nova
+# echo "-- NOVA --"
+# cd $setup_dir
+# sudo ./nova_config.sh
+# cd $current_dir
+# run_filebench nova
 
-echo "-- PMFS --"
-cd $setup_dir
-sudo $setup_dir/pmfs_config.sh
-cd $current_dir
-run_filebench pmfs
+# echo "-- PMFS --"
+# cd $setup_dir
+# sudo $setup_dir/pmfs_config.sh
+# cd $current_dir
+# run_filebench pmfs
 
 echo "-- SplitFS POSIX --"
 cd $source_dir
