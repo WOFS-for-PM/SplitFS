@@ -5583,7 +5583,7 @@ RETT_PREAD _nvp_PREAD(INTF_PREAD)
 RETT_PWRITE _nvp_PWRITE(INTF_PWRITE)
 {
 	CHECK_RESOLVE_FILEOPS(_nvp_);
-	MSG("_nvp_PWRITE %d\n", num_write);
+	DEBUG("_nvp_PWRITE %d\n", num_write);
 	num_write++;
 	instrumentation_type write_time;
 	RETT_PWRITE result;
