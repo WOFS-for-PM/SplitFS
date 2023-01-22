@@ -10,9 +10,10 @@ run_fio()
     fs=$1
     for run in 1 2 3
     do
-        sudo rm -rf $pmem_dir/*
-        sudo taskset -c 0-15 ./run_fs.sh $fs $run
-        sleep 5
+        # sudo rm -rf $pmem_dir/*
+        # sudo taskset -c 0-15 ./run_fs.sh $fs $run
+        # sleep 5
+        sudo ./run_fs.sh $fs $run
     done
 }
 

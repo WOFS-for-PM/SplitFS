@@ -1,13 +1,17 @@
+This project contains original SplitFS code, the adaption of SplitFS to Linux 5.1. For convenience, dynamic remap syscall is replaced by `ioctl` command. Thus, we do not need to change the kernel.
+
 ## Note
 Through the experiments of these days, I found that:
 
+- Use https://github.com/HUNTER-for-NVM/ext4relink/tree/splitfs-5.1 to insert ext4relink module, the kernel module is adapted from https://github.com/rohankadekodi/SplitFS-5.1.
+
+- Ran micro is OK and EXT4_IOC_DYNAMIC_REMAP works like a charm, just type in `bash run.sh` and run `demsg -w` in another terminal (EXT4_IOC_DYNAMIC_REMAP will be called after close syscall). See scripts/git for how to configuring SplitFS-strict, posix, or sync.
+
 - SplitFS never calls relink when I ran Filebench and FIO.
 
-- SplitFS-Strict cannot pass FIO workload.
+- SplitFS-Strict cannot pass FIO workload (Try only using SplitFS-POSIX mode, and it works well).
 
-- Try only using SplitFS-POSIX mode, and it works well.
-
-- The statistics of SplitFS is not accurate (e.g., the num_write should be more than 10000, but it reports 0), and I don't know why.
+- The statistics of SplitFS is not accurate in FIO/Filebench (e.g., the num_write should be more than 10000, but it reports 0), and I don't know why (May be the error: Can't add fileop posix: one with the same name already exists at index 1).
 
 ## SplitFS
 
