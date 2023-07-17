@@ -2,6 +2,13 @@
 
 static size_t Movnt_threshold_granularity = MOVNT_THRESHOLD_GRANULARITY;
 
+void (*_mm_flush)(void const* p);
+
+
+char *addr;
+struct timeval start,end;
+int fd; 
+
 #if 0
 static void
 predrain_memory_barrier(void)

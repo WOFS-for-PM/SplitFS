@@ -32,6 +32,16 @@
 #include "boost/preprocessor/seq/for_each.hpp"
 //#include "boost/preprocessor/cat.hpp"
 
+#ifndef _STAT_VER
+ #if defined (__aarch64__)
+  #define _STAT_VER 0
+ #elif defined (__x86_64__)
+  #define _STAT_VER 1
+ #else
+  #define _STAT_VER 3
+ #endif
+#endif
+
 #define BUF_SIZE 40
 
 #define MIN(X,Y) (((X)<(Y))?(X):(Y))
@@ -74,7 +84,7 @@ typedef int bool;
 #define true 1
 #endif
 
-int execv_done;
+extern int execv_done;
 
 // maximum number of file operations to support simultaneously
 #define MAX_FILEOPS 32

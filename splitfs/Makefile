@@ -5,7 +5,7 @@
 
 
 # Common to all lib*.so
-COMMON_OBJ=nvp_printf.o
+COMMON_OBJ=nvp_printf.o nv_common.o debug.o ledger.o  
 NVP_LRU_CACHE=lru_cache.o
 #NVP_STAGING_QUEUE=queue_impl.o
 NVP_STACK=stack.o

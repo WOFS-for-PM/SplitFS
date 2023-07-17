@@ -350,7 +350,7 @@ void _hub_init2(void)
 	DEBUG("Currently printing on stderr\n");
 
 	_nvp_print_fd = fdopen(_hub_find_fileop("posix")->DUP(2), "a");
-        debug_fd = _hub_find_fileop("posix")->FOPEN("/tmp/ledger_dbg.tmp", "a");
+    debug_fd = _hub_find_fileop("posix")->FOPEN("/tmp/ledger_dbg.tmp", "a");
 	DEBUG("Now printing on fd %p\n", _nvp_print_fd);
 	assert(_nvp_print_fd >= 0);
 
