@@ -9,8 +9,8 @@
 
 #define APPEND_LOG_ENTRY_SIZE 64
 #define OP_LOG_ENTRY_SIZE 37
-#define APPEND_LOG_PATH "/mnt/pmem_emul/append.log"
-#define OP_LOG_PATH "/mnt/pmem_emul/operation.log"
+#define APPEND_LOG_PATH "/mnt/pmem0/append.log"
+#define OP_LOG_PATH "/mnt/pmem0/operation.log"
 #define APPEND_LOG_SIZE (128*1024*1024)
 #define OP_LOG_SIZE (128*1024*1024)
 

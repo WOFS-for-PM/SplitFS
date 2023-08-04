@@ -12,7 +12,7 @@ int main()
 	off_t trunc_size = 20971520;
 	int ret = 0;
 
-	fd = open("/mnt/pmem_emul/ftrunc_file", O_WRONLY|O_CREAT, 0666);
+	fd = open("/mnt/pmem0/ftrunc_file", O_WRONLY|O_CREAT, 0666);
 	if (fd < 0) {
 		printf("open failed. Err = %s\n", strerror(errno));
 	}
