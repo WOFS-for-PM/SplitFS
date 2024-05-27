@@ -149,7 +149,7 @@ int main(int argc, char *argv[]) {
 
 	buf = (char *)malloc(sizeof(char)*datasize);
 
-    fd = open("/mnt/pmem_emul/test.txt", O_RDWR | O_CREAT, 0666);
+    fd = open("/mnt/pmem0/test.txt", O_RDWR | O_CREAT, 0666);
     if (fd < 0) {
         printf("%s: Open failed. Err = %s\n", __func__, strerror(errno));
         exit(0);

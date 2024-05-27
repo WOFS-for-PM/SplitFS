@@ -100,17 +100,25 @@ typedef struct timespec instrumentation_type;
 			Instrustats[i] = 0;			\
 	}							\
 
+static inline void MEM_FENCE(void) {
+	// asm volatile("mfence":::"memory");
+}
+
 #if INSTRUMENT_CALLS 
 
 #define START_TIMING(name, start)				\
 	{							\
+		MEM_FENCE();\
 		clock_gettime(CLOCK_MONOTONIC, &start);		\
+		MEM_FENCE(); \
         }
 
 #define END_TIMING(name, start)						\
 	{                                                               \
 		instrumentation_type end;				\
+		MEM_FENCE();						\
 		clock_gettime(CLOCK_MONOTONIC, &end);			\
+		MEM_FENCE();						\
 		__atomic_fetch_add(&Instrustats[name], (end.tv_sec - start.tv_sec) * 1000000000 + (end.tv_nsec - start.tv_nsec), __ATOMIC_SEQ_CST); \
         }
 
@@ -132,5 +140,7 @@ typedef struct timespec instrumentation_type;
 #define PRINT_TIME() {(void)(Instrustats[0]);}
 	
 #endif
+
+void hub_exit_handler(void);
 
 #endif

@@ -5,7 +5,7 @@ CWD=$(shell pwd)
 # Root of the repo
 ROOT=$(CWD)/../..
 # SplitFS path
-SFS_PATH=/mnt/pmem_emul/
+SFS_PATH=/mnt/pmem0/
 
 all: splitfs.posix splitfs.sync splitfs.strict
 

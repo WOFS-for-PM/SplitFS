@@ -9,6 +9,7 @@
 
 #include "nv_common.h"
 #include "ledger.h"
+#include "time.h"
 #undef fread_unlocked
 
 #define ENV_HUB_FOP "NVP_HUB_FOP"
@@ -446,9 +447,45 @@ BOOST_PP_SEQ_FOR_EACH(HUB_WRAP_HAS_FP_IWRAP, placeholder, FILEOPS_WITH_FP)
 #define HUB_WRAP_SOCKET_IWRAP(r, data, elem) HUB_WRAP_SOCKET()
 
 BOOST_PP_SEQ_FOR_EACH(HUB_WRAP_HAS_FD_IWRAP, placeholder, FILEOPS_WITH_FD)
-BOOST_PP_SEQ_FOR_EACH(HUB_WRAP_NO_FD_IWRAP, placeholder, FILEOPS_WITHOUT_FD)
+BOOST_PP_SEQ_FOR_EACH(HUB_WRAP_NO_FD_IWRAP, placeholder, (VFORK))
 BOOST_PP_SEQ_FOR_EACH(HUB_WRAP_PIPE_IWRAP, placeholder, FILEOPS_PIPE)
 BOOST_PP_SEQ_FOR_EACH(HUB_WRAP_SOCKET_IWRAP, placeholder, FILEOPS_SOCKET)
+
+void hub_exit_handler(void) {
+	DEBUG("hub_exit_handler called\n");
+}
+
+RETT_FORK _hub_FORK(INTF_FORK) {
+	HUB_CHECK_RESOLVE_FILEOPS(_hub_, FORK);
+	int result = 0;
+	DEBUG("CALL: " MK_STR(_hub_FORK) "\n");			
+	DEBUG("_hub_FORK is calling %s->FORK\n", _hub_fileops->name); 
+	result = _hub_fileops->FORK(CALL_FORK);
+	if(result == 0) {
+		// child
+		// do nothing
+		MSG("\nChild process created\n\n");
+	} else if(result > 0) {
+		// signal(SIGCHLD, hub_exit_handler);
+		// parent
+		// do nothing
+	} else {
+		// error
+	}
+	return result;
+}
+
+// void _exit(int status) {
+// 	MSG("Calling _exit(%i)\n", status);
+// }
+
+RETT_CHID_EXIT _hub_CHID_EXIT(INTF_CHID_EXIT) {
+	HUB_CHECK_RESOLVE_FILEOPS(_hub_, CHID_EXIT);
+	int result = 0;
+	DEBUG("CALL: " MK_STR(_hub_CHID_EXIT) "\n");			
+	DEBUG("_hub_CHID_EXIT is calling %s->CHID_EXIT\n", _hub_fileops->name); 
+	_hub_managed_fileops->CHID_EXIT(CALL_CHID_EXIT);
+}
 
 void _hub_resolve_all_fileops(char* tree)
 {
@@ -846,7 +883,7 @@ RETT_OPENAT _hub_OPENAT(INTF_OPENAT)
 RETT_EXECVE _hub_EXECVE(INTF_EXECVE) {
 	int pid = getpid();
 	char exec_hub_filename[BUF_SIZE];
-
+	MSG("%s: START\n", __func__);
         HUB_CHECK_RESOLVE_FILEOPS(_hub_, EXECVE);
 
         struct Fileops_p* op_to_use = NULL;
@@ -898,7 +935,7 @@ RETT_EXECVE _hub_EXECVE(INTF_EXECVE) {
 RETT_EXECVP _hub_EXECVP(INTF_EXECVP) {
 	int pid = getpid();
 	char exec_hub_filename[BUF_SIZE];
-
+	MSG("%s: START\n", __func__);
 	HUB_CHECK_RESOLVE_FILEOPS(_hub_, EXECVP);
 
 	struct Fileops_p* op_to_use = NULL;
@@ -950,7 +987,7 @@ RETT_EXECVP _hub_EXECVP(INTF_EXECVP) {
 RETT_EXECV _hub_EXECV(INTF_EXECV) {
 	int pid = getpid();
 	char exec_hub_filename[BUF_SIZE];
-
+	MSG("%s: START\n", __func__);
 	HUB_CHECK_RESOLVE_FILEOPS(_hub_, EXECV);
 
 	struct Fileops_p* op_to_use = NULL;
@@ -1007,7 +1044,7 @@ RETT_SHM_COPY _hub_SHM_COPY() {
 	unsigned long offset_in_map = 0;
 	int pid = getpid();
 	char exec_hub_filename[BUF_SIZE];
-
+	MSG("%s: START\n", __func__);
 	sprintf(exec_hub_filename, "exec-hub-%d", pid);
 	exec_hub_fd = shm_open(exec_hub_filename, O_RDONLY, 0666);
 	if (exec_hub_fd == -1) {
@@ -1358,7 +1395,7 @@ RETT_IOCTL _hub_IOCTL(INTF_IOCTL)
 	HUB_CHECK_RESOLVE_FILEOPS(_hub_, IOCTL);
 
 	DEBUG_FILE("CALL: _hub_IOCTL\n");
-	
+
 	va_list arg;
 	va_start(arg, request);
 	int* third = va_arg(arg, int*);

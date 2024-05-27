@@ -30,7 +30,7 @@ void close_cloexec_files();
 
 #define NVP_CHECK_NVF_VALID(nvf) do{					\
 		if(UNLIKELY(!nvf->valid)) {				\
-			DEBUG("Invalid file descriptor: %i\n", file);	\
+			DEBUG("Invalid file descriptor \n");	\
 			errno = 0;					\
 			return -1;					\
 		}							\
@@ -43,7 +43,7 @@ void close_cloexec_files();
 
 #define NVP_CHECK_NVF_VALID_WR(nvf) do{					\
 		if(UNLIKELY(!nvf->valid)) {				\
-			DEBUG("Invalid file descriptor: %i\n", file);	\
+			DEBUG("Invalid file descriptor\n");	\
 			errno = 0;					\
 			return -1;					\
 		}							\

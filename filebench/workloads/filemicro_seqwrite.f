@@ -28,7 +28,7 @@
 # a 1GB file.
 # Stops after 1 series of 1024 ($count) writes has been done.
 
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $cached=false
 set $count=10000000
 set $iosize=100

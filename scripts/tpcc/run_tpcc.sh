@@ -3,7 +3,7 @@
 cur_dir=`readlink -f ./`
 src_dir=`readlink -f ../../`
 setup_dir=$src_dir/scripts/configs
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 
 run_tpcc()
 {

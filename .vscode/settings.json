@@ -1,0 +1,24 @@
+{
+    "files.associations": {
+        "*.cjson": "jsonc",
+        "*.wxss": "css",
+        "*.wxs": "javascript",
+        "array": "c",
+        "bitset": "c",
+        "string_view": "c",
+        "initializer_list": "c",
+        "utility": "c",
+        "signal.h": "c",
+        "*.tcc": "c",
+        "functional": "c",
+        "string": "c",
+        "iomanip": "c",
+        "ostream": "c",
+        "sstream": "c",
+        "*.inc": "c",
+        "tuple": "c",
+        "mutex": "c",
+        "condition_variable": "c"
+    },
+    "clangd.path": "/usr/bin/clangd"
+}

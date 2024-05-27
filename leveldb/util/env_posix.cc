@@ -593,7 +593,7 @@ class PosixEnv : public Env {
       *result = env;
     } else {
       char buf[100];
-      snprintf(buf, sizeof(buf), "/mnt/pmem_emul/leveldbtest-%d", int(geteuid()));
+      snprintf(buf, sizeof(buf), "/mnt/pmem0/leveldbtest-%d", int(geteuid()));
       *result = buf;
     }
     // Directory may already exist

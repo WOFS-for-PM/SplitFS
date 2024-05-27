@@ -28,7 +28,7 @@
 # A fsync is issued after 16K ($iters) worth of writes.
 # Stops after one ($count) fsync.
 
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $cached=false
 set $count=1000000
 set $filesize=4g

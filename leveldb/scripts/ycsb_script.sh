@@ -8,13 +8,13 @@ fi
 set -x
 
 runId=$1
-databaseDir=/mnt/pmem_emul/leveldbtest-1000
+databaseDir=/mnt/pmem0/leveldbtest-1000
 ycsbWorkloadsDir=/home/rohan/projects/ycsb_workloads
 levelDbDir=/home/rohan/projects/leveldb
 ext4DAXResultsDir=/home/rohan/projects/ext4DAX/Results/YCSB
 scriptsDir=/home/rohan/projects/leveldb/scripts
 storingFileInfo=/home/rohan/projects/quill-modified/Results/YCSB
-pmemDir=/mnt/pmem_emul
+pmemDir=/mnt/pmem0
 quillDir=/home/rohan/projects/quill-ycsb
 quillAnonDir=/home/rohan/projects/quill-anon/quill-modified
 quillSyscallsDir=/home/rohan/projects/quill-syscalls/quill-modified

@@ -23,7 +23,7 @@
 # Use is subject to license terms.
 #
 
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $filesize=1g
 set $nthreads=1
 set $iosize=1m

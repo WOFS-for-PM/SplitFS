@@ -4,7 +4,7 @@ set -x
 
 cur_dir=$(pwd)
 root_dir=`readlink -f ..`
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 linux_tar=linux-4.18.10.tar.gz
 linux_dir=linux-4.18.10
 

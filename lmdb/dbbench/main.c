@@ -92,7 +92,7 @@ int FLAGS_use_existing_db = 0;
 int FLAGS_rawdev = 0;
 
 // Use the db with the following name.
-const char* FLAGS_db = "/mnt/pmem_emul/db";
+const char* FLAGS_db = "/mnt/pmem0/db";
 
 static rndctx **seeds;
 static Hstctx **hists;

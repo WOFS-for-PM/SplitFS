@@ -2,7 +2,7 @@
 
 cur_dir=$(pwd)
 root_dir=`readlink -f ..`
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 src=$pmem_dir/src
 
 mkdir $src

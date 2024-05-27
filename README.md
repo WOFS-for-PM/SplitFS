@@ -43,8 +43,8 @@ $ export NVP_TREE_FILE=./splitfs/bin/nvp_nvp.tree
 4. #### Set up ext4-DAX 
 ```
 $ sudo mkfs.ext4 -b 4096 /dev/pmem0
-$ sudo mount -o dax /dev/pmem0 /mnt/pmem_emul
-$ sudo chown -R $USER:$USER /mnt/pmem_emul
+$ sudo mount -o dax /dev/pmem0 /mnt/pmem0
+$ sudo chown -R $USER:$USER /mnt/pmem0
 ```
 5. <b>Setup microbenchmark </b>
 ```
@@ -56,13 +56,13 @@ $ cd ..
 ```
 $ sync && echo 3 > /proc/sys/vm/drop_caches # Run this with superuser
 $ ./micro/rw_expt write seq 4096
-$ rm -rf /mnt/pmem_emul/*
+$ rm -rf /mnt/pmem0/*
 ```
 7. <b>Run microbenchmark with SplitFS</b>
 ```
 $ sync && echo 3 > /proc/sys/vm/drop_caches # Run this with superuser
 $ LD_PRELOAD=./splitfs/libnvp.so micro/rw_expt write seq 4096
-$ rm -rf /mnt/pmem_emul/*
+$ rm -rf /mnt/pmem0/*
 ```
 8. <b>Results</b>. The resultes show the throughput of doing appends on ext4 DAX and SplitFS. Appends are **5.8x** faster on SplitFS.
     * ext4-DAX: `0.33M appends/sec`
@@ -148,7 +148,7 @@ Tip: Redirect stderr for less verbose output: e.g `make test 2>/dev/null`
 
 ## Implementation Notes
 1. Only regular files, block special files, and directories (only for consistency guarantees) are handled by SplitFS, the other file types are delegated to POSIX.  
-2. Only files in the persistent memory mount (`/mnt/pmem_emul/`) are handled by SplitFS, rest are delegated to POSIX.  
+2. Only files in the persistent memory mount (`/mnt/pmem0/`) are handled by SplitFS, rest are delegated to POSIX.  
 Currently this is only done by examination of absolute paths specified, we aim to have this check for relative paths too, soon.
 3. We aim to have the persistent-memory mount point controlled via a runtime environment variable soon.
 

@@ -24,7 +24,7 @@
 #
 # ident	"%Z%%M%	%I%	%E% SMI"
 
-set $dir=/mnt/pmem_emul
+set $dir=/mnt/pmem0
 set $nfiles=1000
 set $dirwidth=20
 set $filesize=16k

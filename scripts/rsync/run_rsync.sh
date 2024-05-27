@@ -2,7 +2,7 @@
 
 cur_dir=`readlink -f ./`
 src_dir=`readlink -f ../../`
-pmem_dir=/mnt/pmem_emul
+pmem_dir=/mnt/pmem0
 setup_dir=$src_dir/scripts/configs
 
 run_rsync()
