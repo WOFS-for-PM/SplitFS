@@ -101,7 +101,7 @@ typedef struct timespec instrumentation_type;
 	}							\
 
 static inline void MEM_FENCE(void) {
-	// asm volatile("mfence":::"memory");
+	asm volatile("mfence":::"memory");
 }
 
 #if INSTRUMENT_CALLS 

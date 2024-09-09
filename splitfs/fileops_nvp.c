@@ -64,6 +64,7 @@ RETT_CHID_EXIT _nvp_CHID_EXIT(INTF_CHID_EXIT) {
 	DEBUG("_nvp_CHID_EXIT is just wrapping %s->CHID_EXIT\n", _nvp_fileops->name);
 	MSG("Child Exit\n");
 	PRINT_TIME();
+	nvp_print_io_stats();
 	return _nvp_fileops->CHID_EXIT(CALL_CHID_EXIT);
 }
 
@@ -2270,7 +2271,7 @@ not_found:
 	START_TIMING(file_mmap_t, file_mmap_time);	
 	int max_perms = ((nvf->canRead) ? PROT_READ : 0) | 
 			((nvf->canWrite) ? PROT_WRITE : 0);
-
+	unsigned long num_blocks = MAX_MMAP_SIZE / MMAP_PAGE_SIZE;
 	start_addr = (unsigned long) FSYNC_MMAP
 	(
 		NULL,
@@ -2282,6 +2283,11 @@ not_found:
 		start_offset
 		//0
 	);
+	
+	// touch the memory
+	for (i = 0; i < num_blocks; i++) {
+		((char *)start_addr)[i * MMAP_PAGE_SIZE] = 0;
+	}
 
 	END_TIMING(file_mmap_t, file_mmap_time);
 
@@ -2660,7 +2666,10 @@ not_found:
 			 dr_fd, //fd_with_max_perms,
 			 0
 			 );
-
+		// touch the memory
+		for (i = 0; i < num_blocks; i++) {
+			((char *)nvf->node->dr_info.start_addr)[i * MMAP_PAGE_SIZE] = 0;
+		}
 		DEBUG_FILE("%s: Setting offset_start to DR_SIZE. FD = %d\n",
 			   __func__, nvf->fd);
 		_nvp_fileops->FSTAT(_STAT_VER, dr_fd, &stat_buf);
@@ -2893,6 +2902,11 @@ not_found:
 			 dr_fd, //fd_with_max_perms,
 			 0
 			 );
+		
+		// touch the memory
+		for (i = 0; i < num_blocks; i++) {
+			((char *)nvf->node->dr_info.start_addr)[i * MMAP_PAGE_SIZE] = 0;
+		}
 
 		__atomic_fetch_add(&num_drs_allocated, 1, __ATOMIC_SEQ_CST);
 		DEBUG_FILE("%s: Setting offset_start to DR_SIZE. FD = %d\n",
@@ -3765,6 +3779,7 @@ RETT_PWRITE _nvp_do_pwrite(INTF_PWRITE,
 			 extent_length = _nvp_fileops->PWRITE(nvf->fd, buf, over_len_to_write, write_offset);
 			 goto post_write;
 #else
+			 // random write usually goes here
 			 extent_length = write_to_file_mmap(file, write_offset,
 							    over_len_to_write, 1,
 							    cpuid, buf, 

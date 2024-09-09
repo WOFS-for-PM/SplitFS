@@ -18,7 +18,18 @@
         "*.inc": "c",
         "tuple": "c",
         "mutex": "c",
-        "condition_variable": "c"
+        "condition_variable": "c",
+        "thread_handle.h": "c",
+        "non_temporal.h": "c",
+        "fileops_nvp.h": "c",
+        "cstdlib": "c",
+        "chrono": "c",
+        "deque": "c",
+        "list": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "format": "c",
+        "span": "c"
     },
     "clangd.path": "/usr/bin/clangd"
 }

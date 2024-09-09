@@ -27,6 +27,7 @@ include common.mk
 sofiles: $(COMMON_OBJ) $(NVP_SOFILES)
 #$(NVP_STACK) $(NVP_LOG) $(NVP_LRU_CACHE) 
 
+CLFAGS+=-mclwb -mclflushopt -mavx512f
 
 #     lib*.so files      #
 
