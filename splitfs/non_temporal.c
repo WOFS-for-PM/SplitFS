@@ -3,6 +3,7 @@
 char *addr;
 struct timeval start,end;
 int fd; 
+void (*_mm_flush)(void const* p);
 static size_t Movnt_threshold_granularity = MOVNT_THRESHOLD_GRANULARITY;
 
 #if 0
