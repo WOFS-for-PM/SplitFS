@@ -27,6 +27,10 @@
 #include "log.h"
 #include "tbl_mmaps.h"
 
+struct lfq_ctx staging_mmap_queue_ctx;
+struct lfq_ctx staging_over_mmap_queue_ctx;
+volatile int async_close_enable;
+
 BOOST_PP_SEQ_FOR_EACH(DECLARE_WITHOUT_ALIAS_FUNCTS_IWRAP, _nvp_, ALLOPS_WPAREN)
 BOOST_PP_SEQ_FOR_EACH(DECLARE_WITHOUT_ALIAS_FUNCTS_IWRAP, _nvp_, SHM_WPAREN)
 BOOST_PP_SEQ_FOR_EACH(DECLARE_WITHOUT_ALIAS_FUNCTS_IWRAP, _nvp_, METAOPS)
