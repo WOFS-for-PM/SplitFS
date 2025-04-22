@@ -25,6 +25,9 @@
 struct Fileops_p** _hub_fd_lookup;
 struct Fileops_p*  _hub_managed_fileops;
 
+FILE *debug_fd;
+int _nv_error_count;
+
 void* _libc_so_p;
 
 int _hub_fileops_count = 0;
