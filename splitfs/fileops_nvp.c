@@ -2285,9 +2285,9 @@ not_found:
 	);
 	
 	// touch the memory
-	// for (i = 0; i < num_blocks; i++) {
-	// 	((char *)start_addr)[i * MMAP_PAGE_SIZE] = 0;
-	// }
+	for (i = 0; i < num_blocks; i++) {
+		((char *)start_addr)[i * MMAP_PAGE_SIZE] = 0;
+	}
 
 	END_TIMING(file_mmap_t, file_mmap_time);
 
@@ -2667,9 +2667,9 @@ not_found:
 			 0
 			 );
 		// touch the memory
-		// for (i = 0; i < num_blocks; i++) {
-		// 	((char *)nvf->node->dr_info.start_addr)[i * MMAP_PAGE_SIZE] = 0;
-		// }
+		for (i = 0; i < num_blocks; i++) {
+			((char *)nvf->node->dr_info.start_addr)[i * MMAP_PAGE_SIZE] = 0;
+		}
 		DEBUG_FILE("%s: Setting offset_start to DR_SIZE. FD = %d\n",
 			   __func__, nvf->fd);
 		_nvp_fileops->FSTAT(_STAT_VER, dr_fd, &stat_buf);
@@ -2904,9 +2904,9 @@ not_found:
 			 );
 		
 		// touch the memory
-		// for (i = 0; i < num_blocks; i++) {
-		// 	((char *)nvf->node->dr_info.start_addr)[i * MMAP_PAGE_SIZE] = 0;
-		// }
+		for (i = 0; i < num_blocks; i++) {
+			((char *)nvf->node->dr_info.start_addr)[i * MMAP_PAGE_SIZE] = 0;
+		}
 
 		__atomic_fetch_add(&num_drs_allocated, 1, __ATOMIC_SEQ_CST);
 		DEBUG_FILE("%s: Setting offset_start to DR_SIZE. FD = %d\n",
