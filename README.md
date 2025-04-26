@@ -1,4 +1,16 @@
-## SplitFS
+# Artifacts for SplitFS
+
+This repository contains the SplitFS@SOSP'19 source code for Linux 5.1.0. The full artifact evaluation steps can be obtained from [our AE repository](https://github.com/WOFS-for-PM/tests).
+
+## Branches Corresponding to the Paper
+
+| **Branch**              | **Description**                                                                 |
+|-------------------------|----------------------------------------------------------------------------------|
+| main                  | The original SplitFS code                                   |
+| no-prefault       | The original SplitFS code with GCC-10.X compatibility                                                    |
+| timing              | Touch the memory region once it is `mmap`ed to ensure the precise I/O time                                                  |
+
+## Introduction
 
 [SplitFS](https://github.com/utsaslab/SplitFS) is a file system for Persistent Memory (PM) which is aimed at reducing the software overhead of applications accessing Persistent Memory. SplitFS presents a novel split of responsibilities between a user-space library file system and an existing kernel PM file system. The user-space library file system handles data operations by intercepting POSIX calls, memory mapping the underlying file, and serving the reads and overwrites using processor loads and stores. Metadata operations are handled by the kernel file system (ext4 DAX). 
 
